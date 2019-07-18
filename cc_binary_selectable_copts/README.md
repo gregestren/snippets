@@ -39,21 +39,21 @@ This example has five files:
 
 To see it in action, try the following commands:
 
-```
+```sh
 $ bazel run //:app_with_feature1
 ...
 Running my app!
 Building lib with feature 1!
 ```
 
-```
+```sh
 $ bazel run //:app_with_feature2
 ...
 Running my app!
 Building lib with feature 2!
 ```
 
-```
+```sh
 $ bazel run //:app_forgets_to_set_features 
 ERROR: $(MYWORKSPACE)/cc_binary_selectable_copts/BUILD:32:13: Configurable attribute "copts"
 doesn't match this configuration: You must explicitly set which features you want!
