@@ -55,11 +55,12 @@ Building lib with feature 2!
 
 ```
 $ bazel run //:app_forgets_to_set_features 
-ERROR: $(MYWORKSPACE)/cc_binary_selectable_copts/BUILD:32:13: Configurable attribute "copts" doesn't match this configuration: You must explicitly set which features you want!
+ERROR: $(MYWORKSPACE)/cc_binary_selectable_copts/BUILD:32:13: Configurable attribute "copts"
+doesn't match this configuration: You must explicitly set which features you want!
 ```
 
 This example relies on `select` and involves some duplication of values
 (e.g. `"feature1"` is defined in `//custom_settings:mycopts` and `//:lib`
 separately sets `"-Dfeature1"`). You could write more Starlark macros to make the
-`BUILD` API even simpler, for example not requiring any changes to
+`BUILD` API even simpler. For example: not requiring any changes to
 `cc_library` at all.
