@@ -1,11 +1,9 @@
+# This load statement replaces the native cc_binary (which has no "set_features"
+# attribute) with a macro that strings together the logic to make that work,
+# then passes everything else back to the native cc_binary.
 load("//:defs.bzl", "transition_rule", "cc_binary")
 
-#transition_rule(
-#    name = "foo",
-#    actual_binary = ":app_with_feature1",
-#    set_features = "feature1",
-#)
-
+# To see what this does, try "$ bazel run //:app_with_feature1".
 cc_binary(
     name = "app_with_feature1",
     srcs = ["main.cc"],
@@ -13,6 +11,7 @@ cc_binary(
     deps = [":lib"],
 )
 
+# To see what this does, try "$ bazel run //:app_with_feature2".
 cc_binary(
     name = "app_with_feature2",
     srcs = ["main.cc"],
@@ -20,12 +19,15 @@ cc_binary(
     deps = [":lib"],
 )
 
+# This binary "forgets" to set any features, so we have it fail with
+# a descriptive message.
 cc_binary(
     name = "app_forgets_to_set_features",
     srcs = ["main.cc"],
     deps = [":lib"],
 )
 
+# The library only builds if some feature is requested.
 cc_library(
     name = "lib",
     srcs = ["lib.cc"],

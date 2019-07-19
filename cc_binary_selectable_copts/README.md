@@ -12,7 +12,7 @@ This example has five files:
   `cc_library` uses a `select` to read this flag and set its `copts`
   accordingly. This file also declares the `config_setting`s the `select` uses.
   
-* [defs.bzl](defz.bzl) - This defines a custom Starlark rule `transition_rule`
+* [defs.bzl](defs.bzl) - This defines a custom Starlark rule `transition_rule`
   which defines an attribute `set_features` that sets the desired feature and
   `actual_binary` which declares the `cc_binary` this should apply to.
   
