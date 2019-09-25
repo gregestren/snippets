@@ -1,10 +1,8 @@
-### Example showing how to use
-    [platforms](https://docs.bazel.build/versions/master/platforms.html) with
-    custom C++ toolchains. 
+### Example showing how to use [platforms](https://docs.bazel.build/versions/master/platforms.html) with custom C++ toolchains. 
 
 This example defines a mock PPC-compatible C++ toolchain
-(//toolchains:example_cc_toolchain) and a custom platform advertising PPC
-(//platforms:custom_machine).
+(`//toolchains:example_cc_toolchain`) and a custom platform advertising PPC
+(`//platforms:custom_machine`).
 
 To see it in action:
 
@@ -15,8 +13,7 @@ $ bazel-bin/hello
 Hello!
 ```
 
-** Build with the new platform, but without telling Bazel about the new
-   toolchain: **
+**Build with the new platform, but without telling Bazel about the new toolchain:**
 ```sh
 $ bazel build //:hello  --incompatible_enable_cc_toolchain_resolution
 --platforms=//platforms:custom_machine
@@ -30,7 +27,7 @@ FAILED: Build did NOT complete successfully (0 packages loaded, 38 targets
 configured)
 ```
 
-** Build with the new platform and the new toolchain: **
+**Build with the new platform and the new toolchain:**
 ```sh
 $ bazel build //:hello  --incompatible_enable_cc_toolchain_resolution
 --platforms=//platforms:custom_machine  --extra_toolchains=//tool 
@@ -39,11 +36,10 @@ $ cat bazel-bin/hello
 dummy out
 ```
 
-** Build with the new platform, but forget to set
-`--incompatible_enable_cc_toolchain_resolution`, so the C++ rules don't try to
-use a different toolchain: **
+**Build with the new platform, but forget to set `--incompatible_enable_cc_toolchain_resolution`, so the C++ rules don't try to use a different toolchain:**
 ```sh
-$ bazel build //:hello --platforms=//platforms:custom_machine  --extra_toolchains=//toolchains:example_cc_toolchain
+$ bazel build //:hello --platforms=//platforms:custom_machine 
+--extra_toolchains=//toolchains:example_cc_toolchain
 INFO: Build completed successfully, 1 total action
 $ bazel-bin/hello
 Hello!
