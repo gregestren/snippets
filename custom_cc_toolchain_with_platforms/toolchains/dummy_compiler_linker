@@ -1,0 +1,33 @@
+#!/bin/bash
+#
+# Dummy C++ compiler and linker implementation that works with Bazel C++
+# semantics
+# (https://docs.bazel.build/versions/master/tutorial/cc-toolchain-config.html).
+#
+# This just writes sample text to the expected outputs (it doesn't actually
+# compile C++ code).
+#
+# Its point is to demonstrate writing custom C++ toolchains. 
+#
+# THIS WORKED AT THE TIME THIS WAS CHECKED IN. IT'S PRIMITIVE AND COULD FALL OUT
+# OF DATE IF BAZEL'S SEMANTICS FOR GENERATING C++ COMMANDS CHANGES.
+
+outfile="${@: -1}"
+
+if [[ $outfile =~ \.o$ ]]; then
+  # If we're compiling foo.c, Bazel expects both "foo.o" and "foo.d" outputs.
+  dotdfile=${outfile/.o/.d}
+  echo dummy object file > $outfile
+  echo dummy dotd file > $dotdfile
+elif [[ $outfile =~ \.params$ ]]; then
+  # If we're linking foo, Bazel sends the command line "${LINKER}
+  # @path/to/foo-2.params". That file contains the real command line, so we need
+  # to read it to find the expected outputs.
+  while read p; do
+    if [[ "$p" =~ "bazel-out" ]]; then
+      echo dummy out > $p
+    fi
+  done <${outfile:1}  # Take the "@" prefix off "@path/to/foo-2.params".
+else
+ echo "This isn't a compile or link. Unknown output $outfile"
+fi
