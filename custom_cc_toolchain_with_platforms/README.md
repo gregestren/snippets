@@ -30,7 +30,7 @@ configured)
 **Build with the new platform and the new toolchain:**
 ```sh
 $ bazel build //:hello  --incompatible_enable_cc_toolchain_resolution
---platforms=//platforms:custom_machine  --extra_toolchains=//tool 
+--platforms=//platforms:custom_machine  --extra_toolchains=//toolchains:example_cc_toolchain
 INFO: Build completed successfully, 4 total actions
 $ cat bazel-bin/hello
 dummy out
