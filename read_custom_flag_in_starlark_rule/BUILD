@@ -9,8 +9,6 @@ load("@bazel_skylib//rules:common_settings.bzl", "string_flag")
 
 # Define our custom flag.
 string_flag(
-    # You can set this at the command line with:
-    #   $ bazel build //:all --//:my_flag.
     name = "my_flag",
     build_setting_default = "my_default",
     # We could also omit this attribute to allow any value:
