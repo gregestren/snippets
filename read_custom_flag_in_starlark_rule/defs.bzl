@@ -15,9 +15,9 @@ def _impl(ctx):
 simple_rule = rule(
     implementation = _impl,
     attrs = {
-    	# To be able to read //:my_flag, we depend on it as a normal rule
-	# dependency. We prefix the attribute name with a "_" because we don't
-	# want users of simple_rule to set this attribute to other values.
-        "_custom_flag_dep": attr.label(default = Label("//:my_flag"))
+        # To be able to read //:my_flag, we depend on it as a normal rule
+        # dependency. We prefix the attribute name with a "_" because we don't
+        # want users of simple_rule to set this attribute to other values.
+        "_custom_flag_dep": attr.label(default = Label("//:my_flag")),
     },
 )
