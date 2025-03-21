@@ -3,11 +3,11 @@
 This example demonstates Bazel's new "project-scoped flags" experimental feature. 
 
 This feature lets you restrict a Starlark flag's transition impact to only a
-couple of packages. For example, if //myproject:project_scoped_binary
-transitions on Starlark flag //myproject:project_scoped_flag, we can "undo "the"
-transition on that flag after leaving //myproject's qualifying packages.
+couple of packages. For example, if `//myproject:project_scoped_binary`
+transitions on Starlark flag `//myproject:project_scoped_flag`, we can "undo" the
+transition on that flag after leaving `//myproject`'s qualifying packages.
 
-The qualifying packages are determined by myproject/PROJECT.scl (PROJECT.scl is
+The qualifying packages are determined by `myproject/PROJECT.scl` (`PROJECT.scl` is
 also an experimental new Bazel feature for storing important project
 information). 
 
@@ -18,7 +18,7 @@ other words, it makes config transitions cheaper.
 #### Example:
 
 Build two targets that transition on an "unscoped" Starlark flag. These targets
-share a common dependency subgaph in //lib. So building them both, where each
+share a common dependency subgaph in `//lib`. So building them both, where each
 transitions to a different value, doubles the size of that build graph.
 
 This result shows the # of evaluated graph nodes when building these targets:
