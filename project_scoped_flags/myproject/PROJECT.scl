@@ -1,0 +1,21 @@
+# Experimental new project data configuration.
+#
+# A "project" is a checked-in file that Bazel can read to determine important
+# project information. This example sets "active_directories", which is used by
+# project-scoped flags to see which directories should *keep* the flag's
+# transitioned value and which should revert to its pre-transitioned value.
+#
+# The idea is that if //myproject has a few targets but most of its transitive
+# build graph is in third-party dependencies, changing a project-specific flag
+# shouldn't invalidate all those dependencies. By limiting the flag's
+# propagation we can produce smaller, more cacheable build graphs, and faster and
+# cheaper builds.
+
+project = {
+  "active_directories": {
+    "default": [
+      "//myproject",
+      "//also_my_project",
+    ],
+  },
+}
